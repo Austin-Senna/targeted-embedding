@@ -1,0 +1,14 @@
+# config.yaml
+run_type: "syntax"
+audio_folder: "BLIMP_KOKORO"
+output_base_dir: "output_features"
+# create uses RELATIVE folders, while LET groups them all into one folder
+folder_mode: "CREATE"
+batch_size: 4
+max_samples: 10000
+
+prompts:
+  # "01" Equivalent: Without task prompt (transcription only)
+  without_prompt: ""
+  # "02" Equivalent: With task prompt
+  with_prompt: "Listen to the following sentence. Is it grammatically correct or ungrammatical? Answer with 'Correct' or 'Incorrect'."
