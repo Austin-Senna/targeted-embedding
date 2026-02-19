@@ -2,13 +2,17 @@
 run_type: "syntax"
 audio_folder: "BLIMP_KOKORO"
 output_base_dir: "output_features"
-# create uses RELATIVE folders, while LET groups them all into one folder
+
+# CREATE uses RELATIVE folders, while LET groups them all into one folder
+# e.g. CREATE: (BLIMP_KOKORO/islands/a.wav --> output_features_02/islands/a.npy)
+# e.g. LET: (BLIMP_KOKORO/islands/a.wav --> output_features_02/a.npy)
+
 folder_mode: "CREATE"
 batch_size: 4
 max_samples: 10000
 
 prompts:
-  # "01" Equivalent: Without task prompt (transcription only)
-  without_prompt: ""
-  # "02" Equivalent: With task prompt
-  with_prompt: "Listen to the following sentence. Is it grammatically correct or ungrammatical? Answer with 'Correct' or 'Incorrect'."
+  - eval_type: "01"
+    text: ""
+  - eval_type: "02"
+    text: "Listen to the following sentence. Is it grammatically correct or ungrammatical? Answer with 'Correct' or 'Incorrect'."

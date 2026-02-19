@@ -107,30 +107,19 @@ def main():
             
         try:
             # Run Inference 1: Without Task Prompt (01)
-            process_batch(
-                batch_files=valid_files,
-                loaded_audios=loaded_audios,
-                prompt_text=config['prompts']['without_prompt'],
-                eval_type="01",
-                config=config,
-                processor=processor,
-                model=model,
-                logger=logger
-            )
-
-            # Run Inference 2: With Task Prompt (02)
-            process_batch(
-                batch_files=valid_files,
-                loaded_audios=loaded_audios,
-                prompt_text=config['prompts']['with_prompt'],
-                eval_type="02",
-                config=config,
-                processor=processor,
-                model=model,
-                logger=logger
-            )
+            for prompt_item in config['prompts']:
+                process_batch(
+                    batch_files=valid_files,
+                    loaded_audios=loaded_audios,
+                    prompt_text=prompt_item['text'],
+                    eval_type=prompt_item['eval_type'],
+                    config=config,
+                    processor=processor,
+                    model=model,
+                    logger=logger
+                )
             
-            logger.info(f"[{min(i + batch_size, len(all_audios))}/{len(all_audios)}] Processed batch (Both Prompts)")
+            logger.info(f"[{min(i + batch_size, len(all_audios))}/{len(all_audios)}] Processed batch for all prompts")
             
         except Exception as e:
             logger.error(f"Failed during inference for batch starting with {valid_files[0]}: {e}")
